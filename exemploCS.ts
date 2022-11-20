@@ -1,4 +1,4 @@
-// primeiro passo criar interface com os metodos que são necessarios
+// primeiro passo criar interface com os metodos comuns que todos fazem
 type IPersonagem = {
   correr: () => void
   andar: () => void
@@ -17,6 +17,7 @@ interface ITR extends IPersonagem {
   armar: () => void
 }
 
+// setimo interface das props que sera colocadas no contructor
 interface IPersonagemProps {
   vida: number
   colete: number
@@ -35,13 +36,18 @@ class Personagem implements IPersonagem {
   //propriedades
   //private usa apenas dentro da class, os metodos que irao modificar elas
 
+  // quarto propriedas que serao utilizadas dentro da class
   private vida: number
   private colete: number
   private estaVivo: boolean = true
+
+  // sexto o que vai receber na criacao do personagem
   constructor({ vida, colete }: IPersonagemProps) {
     this.vida = vida
     this.colete = colete
   }
+
+  // quinto efetuar a montagem dos metodos
   tomarDano(dano: number): void {
     this.vida = this.vida - dano
     this.colete = this.colete - dano * 0.125
@@ -82,10 +88,13 @@ class Personagem implements IPersonagem {
   }
 }
 
+// class do ict
 class CT extends Personagem implements ICT {
   private temKitDeDesarme: boolean
 
   constructor({ vida, colete, kitDeDesarme }: ICTProps) {
+    //super pq vem de outro construtor da classe pai(personagem)
+    // super envia o valor recebido para a classe pai
     super({ vida, colete })
     this.temKitDeDesarme = kitDeDesarme
   }
@@ -114,9 +123,11 @@ class TR extends Personagem implements ITR {
   }
 }
 
+// criação dos personagens
 const tr1 = new TR({ vida: 100, colete: 100, C4: true })
 const ct1 = new CT({ vida: 100, colete: 100, kitDeDesarme: false })
 
+// utilizacao dos metodos com os personagens criados
 tr1.tomarDano(50)
 tr1.tomarDano(20)
 tr1.andar()
