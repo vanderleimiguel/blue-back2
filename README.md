@@ -8,3 +8,6 @@ yarn add ts-node-dev -D
 
 criado no package.json
 "start": "tsnd --transpile-only index.ts"
+
+node para ts
+yarn add @types/node
